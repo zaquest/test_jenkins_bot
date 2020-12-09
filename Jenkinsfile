@@ -47,7 +47,7 @@ def getChangeLog() {
       for (int j = 0; j < entries.length; j++) {
           def entry = entries[j]
           def commitId = entry.getCommitId().take(6)
-          def msg = entry.msg.take(9)
+          def msg = truncate(entry.msg)
           // changeLog << "${commitId} ${truncate(entry.msg)} ${entry.author}".toString()
           changeLog << "${commitId} ${msg}"
       }
@@ -58,6 +58,7 @@ def getChangeLog() {
   return changeLog.join('\n')
 }
 
+@NonCPS
 def truncate(str) {
   def MAX_LEN = 10
   if (str.length() > MAX_LEN) {
