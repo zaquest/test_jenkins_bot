@@ -25,7 +25,7 @@ pipeline {
   post {
     always {
       telegramSend(
-        message: "${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}\n```${getChangeLog()}```",
+        message: "${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}\n${getChangeLog()}",
         chatId: -467484815
       )
     }
