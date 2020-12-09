@@ -23,12 +23,32 @@ pipeline {
   }
 
   post {
-    always {
+    success {
       telegramSend(
         message: """
 ${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
+
+Change log:
 ```
 ${getChangeLog()}
+```
+""",
+        chatId: -467484815
+      )
+    }
+    failure {
+      telegramSend(
+        message: """
+${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
+
+Change log:
+```
+${getChangeLog()}
+```
+
+Log:
+```
+${currentBuild.getLog()}
 ```
 """,
         chatId: -467484815
