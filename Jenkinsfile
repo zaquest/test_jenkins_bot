@@ -77,5 +77,5 @@ def getIcon(status) {
   } else if (status == 'FAILURE') {
     icons = ['🤢', '😱', '❌']
   }
-  return icons[rnd.nextInt(icons.length)]
+  return icons[rnd.nextInt(icons.size())]
 }
