@@ -48,7 +48,7 @@ ${getChangeLog()}
 
 Log:
 ```
-${currentBuild.getLog()}
+${getLog()}
 ```
 """,
         chatId: -467484815
@@ -84,4 +84,10 @@ def truncate(str) {
     return str.take(MAX_LEN - 1) + '…'
   }
   return str
+}
+
+
+@NonCPS
+def getLog() {
+  return currentBuild.rawBuild.getLog()
 }
