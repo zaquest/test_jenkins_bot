@@ -48,8 +48,8 @@ String getChangeLog() {
           changeLog << "${commitId} ${truncate(entry.msg)} ${entry.author}".toString()
       }
   }
-  if (!changeLog) {
-    changeLog = 'No changes'
+  if (changeLog.size() == 0) {
+    changeLog << 'No changes'
   }
   return changeLog.join('\n');
 }
