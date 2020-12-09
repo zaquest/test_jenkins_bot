@@ -34,20 +34,21 @@ pipeline {
 
 
 @NonCPS
-def getChangeLog() {
+String getChangeLog() {
   def MAX_MSG_LEN = 100
   def changeLogSets = currentBuild.changeSets
-  def changeLog = "";
+  def changeLog = [];
   for (int i = 0; i < changeLogSets.size(); i++) {
       def entries = changeLogSets[i].items
       for (int j = 0; j < entries.length; j++) {
           def entry = entries[j]
+          def commitId = entry.commitId.take(6)
           def truncated_msg = entry.msg.take(MAX_MSG_LEN)
-          changeLog += "[${entry.commitId}] by ${entry.author}: ${truncated_msg}"
+          changeLog << "${commitId} by ${entry.author}: ${truncated_msg}"
       }
   }
   if (!changeLog) {
-    changeLog = "No changes"
+    changeLog = 'No changes'
   }
-  return changeLog;
+  return changeLog.join('\n');
 }
