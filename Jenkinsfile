@@ -21,4 +21,11 @@ pipeline {
       }
     }
   }
+
+  post {
+    always {
+      telegramSend message: "${currentBuild.displayName} ${env.BRANCH_NAME} build was ${currentBuild.displayName}"
+                   chatId: -467484815
+    }
+  }
 }
