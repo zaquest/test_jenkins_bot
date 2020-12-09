@@ -46,7 +46,7 @@ String getChangeLog() {
           def entry = entries[j]
           // def commitId = entry.getCommitId().take(6)
           // changeLog << "${commitId} ${truncate(entry.msg)} ${entry.author}".toString()
-          changeLog.add(entry.commitId)
+          changeLog.add(entry.getCommitId())
       }
   }
   if (changeLog.size() == 0) {
