@@ -26,7 +26,7 @@ pipeline {
     always {
       telegramSend(
         message: """
-${currentBuild.fullProjectName}/${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
+`Build of ${currentBuild.fullProjectName}` ${currentBuild.displayName} finished with ${currentBuild.result} ${getIcon(currentBuild.result)}
 
 Change log:
 ```
@@ -66,4 +66,16 @@ def truncate(str) {
     return str.take(MAX_LEN - 1) + '…'
   }
   return str
+}
+
+
+def getIcon(status) {
+  Random rnd = new Random()
+  def icons = ['💁‍♀️', '🤷‍♀️', '🙃']
+  if (status == 'SUCCESS') {
+    icons = ['👌', '👍', '✅']
+  } else if (status == 'FAILURE') {
+    icons = ['🤢', '😱', '❌']
+  }
+  return icons[rnd.nextInt(icons.size)]
 }
