@@ -23,32 +23,14 @@ pipeline {
   }
 
   post {
-    success {
+    always {
       telegramSend(
         message: """
-${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
+${currentBuild.fullProjectName}/${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
 
 Change log:
 ```
 ${getChangeLog()}
-```
-""",
-        chatId: -467484815
-      )
-    }
-    failure {
-      telegramSend(
-        message: """
-${env.BRANCH_NAME}: build ${currentBuild.displayName} status ${currentBuild.result}
-
-Change log:
-```
-${getChangeLog()}
-```
-
-Log:
-```
-${getLog()}
 ```
 """,
         chatId: -467484815
@@ -79,15 +61,9 @@ def getChangeLog() {
 
 @NonCPS
 def truncate(str) {
-  def MAX_LEN = 100
+  def MAX_LEN = 50
   if (str.length() > MAX_LEN) {
     return str.take(MAX_LEN - 1) + '…'
   }
   return str
-}
-
-
-@NonCPS
-def getLog() {
-  return currentBuild.rawBuild.getLog()
 }
