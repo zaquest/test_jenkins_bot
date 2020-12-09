@@ -48,7 +48,7 @@ String getChangeLog() {
   if (!changeLog) {
     changeLog = 'No changes'
   }
-  return changeLog.join('\n');
+  return changeLog.join('\n').toString();
 }
 
 String truncate(String str) {
