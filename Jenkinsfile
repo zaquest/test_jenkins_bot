@@ -26,7 +26,7 @@ pipeline {
     always {
       telegramSend(
         message: """
-`Build of ${currentBuild.fullProjectName}` ${currentBuild.displayName} finished with ${currentBuild.result} ${getIcon(currentBuild.result)}
+Build ${currentBuild.displayName} of `${currentBuild.fullProjectName}` finished with ${currentBuild.result} ${getIcon(currentBuild.result)}
 
 Change log:
 ```
