@@ -17,7 +17,7 @@ pipeline {
         branch 'branch'
       }
       steps {
-        sh 'echo branch'
+        sh 'echo branch && exit 1'
       }
     }
   }
@@ -25,7 +25,7 @@ pipeline {
   post {
     always {
       telegramSend(
-        message: "${currentBuild.displayName} ${env.BRANCH_NAME} build was ${currentBuild.displayName}",
+        message: "${currentBuild.displayName} ${env.BRANCH_NAME} build was ${currentBuild.status}",
         chatId: -467484815
       )
     }
