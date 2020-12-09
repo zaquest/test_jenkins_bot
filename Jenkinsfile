@@ -59,7 +59,7 @@ def getChangeLog() {
 
 @NonCPS
 def truncate(str) {
-  def MAX_LEN = 10
+  def MAX_LEN = 100
   if (str.length() > MAX_LEN) {
     return str.take(MAX_LEN - 1) + '…'
   }
